@@ -8,6 +8,6 @@ The software and data associated with Dardiry, Piscobulu, Kalirad & Sommer, _Exp
 
 + main_figs_model.ipynb: The code with instructions to generate the main modeling figures (fig 4b-4c, 4e-4f, and fig 5).
 
-+ main_figs_exp.ipynb: The code with instructions to generate the main experimental figures (fig 2--3), including the Bayesian statistical analyses associated with these figures.
++ main_figs_exp.ipynb: The code with instructions to generate the main experimental figures (fig 2-3), including the Bayesian statistical analyses associated with these figures.
 
 + raw_data.zip: The raw data required to generate main figures. 
