@@ -1,6 +1,6 @@
 # Cost of plasticity
 
-Dardiry, Piscobulu, Kalirad & Sommer. Experimental and theoretical support for costs of plasticity and phenotype in a nematode predatory trait.
+The software and data associated with Dardiry, Piscobulu, Kalirad & Sommer, _Experimental and theoretical support for costs of plasticity and phenotype in a nematode predatory trait_.
 
 ## Contents:
 
