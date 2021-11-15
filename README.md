@@ -14,3 +14,7 @@ The software and data associated with Dardiry, Piscobulu, Kalirad & Sommer, _Exp
 
 + supp_figs.ipynb
 
++ Supp_freq_stat.ipynb: The equivalent frequentist statistics for Figure 2-3.
+
+
+
