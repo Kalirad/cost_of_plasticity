@@ -6,7 +6,7 @@ together, on two different bacterial diets.
 
 __author__ = 'Ata Kalirad'
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 
 import numpy as np
@@ -26,7 +26,7 @@ fec_pars = {'A': {'OP50': [22.65, 68.45, 57.05, 33.4,  4.97], 'Novo': [11.66, 62
             'C': {'OP50': [19.8 , 60.3 , 43.02, 19.9,  6.6 ], 'Novo': [16.88, 80.77, 77.7 , 16.28,  1.4]}}
 
 # consumption rates for each developmental stage
-cons = [0.0, 0.2, 0.0, 3.0, 0.5, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
+cons = np.array([0.0, 0.2, 0.0, 0.3, 0.5, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9])
 
 # different arrangements of food in the one-dimensional stepping-stone model.
 env_arr = {'ONO': ['OP50' for i in range(6)] + ['Novo' for i in range(6)],
@@ -151,8 +151,10 @@ def simulate_pop_dynamic(strain_1, strain_2, food_type, inti_food=1e12, mig_rate
     for i in index:
         food[i[0]][i[1]]=inti_food
         
-    pop1 = np.array([[0 for i in range(pop_dims[0])] for i in range(pop_dims[1])])
-    pop2 = np.array([[0 for i in range(pop_dims[0])] for i in range(pop_dims[1])])
+    # pop1 = np.array([[0 for i in range(pop_dims[0])] for i in range(pop_dims[1])])
+    # pop2 = np.array([[0 for i in range(pop_dims[0])] for i in range(pop_dims[1])])
+    pop1 = np.zeros(shape=(pop_dims[1], pop_dims[0]))
+    pop2 = np.zeros(shape=(pop_dims[1], pop_dims[0]))
     pop1[0][0] = 1
     pop2[0][n_pop-1] = 1
     n1 = np.array([[0], [0], [0], [0], [0], [50], [0], [0], [0], [0], [0], [0]])
@@ -176,13 +178,10 @@ def simulate_pop_dynamic(strain_1, strain_2, food_type, inti_food=1e12, mig_rate
         f_1[i[0]][i[1]] = gen_fec_matrix(strain_1, env[i[0]][i[1]])
         f_2[i[0]][i[1]] = gen_fec_matrix(strain_2, env[i[0]][i[1]])
     data = {'pop1':{}, 'pop2':{}}
-    pred_data = {'killed_by_pop1':{}, 'killed_by_pop2':{}}
     mig_data = {'dauer_A':{}, 'dauer_C':{}}
     for i in index:
         data['pop1'][i] = []
         data['pop2'][i] = []
-        pred_data['killed_by_pop1'][i] = []
-        pred_data['killed_by_pop2'][i] = []
         mig_data['dauer_A'][i] = []
         mig_data['dauer_C'][i] = []
     constant_resource=False
@@ -198,7 +197,7 @@ def simulate_pop_dynamic(strain_1, strain_2, food_type, inti_food=1e12, mig_rate
             pop1_dem[i[0]][i[1]] = np.array(np.matmul(get_transition_probs(strain_1, env[i[0]][i[1]], food[i[0]][i[1]]) + f_1[i[0]][i[1]], pop1_dem[i[0]][i[1]]))
             pop2_dem[i[0]][i[1]] = np.array(np.matmul(get_transition_probs(strain_2, env[i[0]][i[1]], food[i[0]][i[1]]) + f_2[i[0]][i[1]], pop2_dem[i[0]][i[1]]))
             if not constant_resource:
-                food[i[0]][i[1]] -= (np.sum([rho*freq for rho,freq in zip(cons, [pop1_dem[i[0]][i[1]][dem][0] for dem in range(8)])]) + np.sum([rho*freq for rho,freq in zip(cons, [pop2_dem[i[0]][i[1]][dem][0] for dem in range(8)])]))
+                food[i[0]][i[1]] -= np.sum(cons.reshape(len(cons),1)*(pop1_dem[i[0]][i[1]] + pop2_dem[i[0]][i[1]])) 
                 if food[i[0]][i[1]] < 0:
                     food[i[0]][i[1]] = 0
         # migration
@@ -224,7 +223,6 @@ def simulate_pop_dynamic(strain_1, strain_2, food_type, inti_food=1e12, mig_rate
                     pred_by_2 =  att_prob[env[i[0]][i[1]]][strain_2]*n_predator*n_prey
                     if pred_by_2 > n_prey:
                         pred_by_2 = n_prey
-                    pred_data['killed_by_pop2'][i].append(n_predator)
                 else:
                     pred_by_2 = 0
                 # Predation by RSC017
@@ -238,4 +236,4 @@ def simulate_pop_dynamic(strain_1, strain_2, food_type, inti_food=1e12, mig_rate
                     pred_by_1 =0 
                 pop1_dem[i[0]][i[1]][1] = pop1_dem[i[0]][i[1]][1] - pred_by_2
                 pop2_dem[i[0]][i[1]][1] = pop2_dem[i[0]][i[1]][1] - pred_by_1
-    return data, index
+    return data, index, mig_data
