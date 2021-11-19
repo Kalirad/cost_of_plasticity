@@ -6,7 +6,7 @@ together, on two different bacterial diets.
 
 __author__ = 'Ata Kalirad'
 
-__version__ = '1.1'
+__version__ = '1.0.2'
 
 
 import numpy as np
@@ -150,9 +150,7 @@ def simulate_pop_dynamic(strain_1, strain_2, food_type, inti_food=1e12, mig_rate
     food = np.zeros(shape=(pop_dims[1], pop_dims[0]))
     for i in index:
         food[i[0]][i[1]]=inti_food
-        
-    # pop1 = np.array([[0 for i in range(pop_dims[0])] for i in range(pop_dims[1])])
-    # pop2 = np.array([[0 for i in range(pop_dims[0])] for i in range(pop_dims[1])])
+
     pop1 = np.zeros(shape=(pop_dims[1], pop_dims[0]))
     pop2 = np.zeros(shape=(pop_dims[1], pop_dims[0]))
     pop1[0][0] = 1
@@ -203,7 +201,8 @@ def simulate_pop_dynamic(strain_1, strain_2, food_type, inti_food=1e12, mig_rate
         # migration
         for i in index:
             for nex in neighb_ind[i]:
-                if food[nex[0]][nex[1]] > food[i[0]][i[1]]:
+                if np.round(food[nex[0]][nex[1]], decimals=1) > np.round(food[i[0]][i[1]], decimals=1):
+                    # The amount of food is rounded to one decimal point to remove the effect of infinitesimal differences in food on dispersal
                     disp_rate = mig_rate
                 else:
                     disp_rate = 0.0
