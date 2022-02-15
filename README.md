@@ -4,7 +4,7 @@ The software and data associated with Dardiry, Piscobulu, Kalirad & Sommer, _Exp
 
 ## Contents:
 
-+ digital_worm.py: The model written in Python 3.7.
++ digital_worm.py: The model written in Python 3.7.1
 
 + main_figs_model.ipynb: The code with instructions to generate the main modeling figures.
 
