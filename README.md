@@ -14,5 +14,7 @@ The software and data associated with Dardiry, Piscobulu, Kalirad & Sommer, _Exp
 
 + supp_figs.ipynb
 
++ digital_worm_n_dev_dif.py: A verison of the model written in Python 3.7.1 in which the developmental speeds ramin unchanged upon switching the diet. Usedin `supp_figs.ipynb`. 
+
 
 
