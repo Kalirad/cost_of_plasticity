@@ -4,7 +4,7 @@ The software and data associated with Dardiry, Piscobulu, Kalirad & Sommer, _Exp
 
 ## Contents:
 
-+ digital_worm.py: The model written in Python 3.10.4
++ digital_worm.py: The model written in Python 3.10
 
 + main_figs_model.ipynb: The code with instructions to generate the main modeling figures.
 
@@ -12,9 +12,9 @@ The software and data associated with Dardiry, Piscobulu, Kalirad & Sommer, _Exp
 
 + raw_data.zip: The raw data required to generate main and supp figures. 
 
-+ supp_figs.ipynb
++ supp_figs.ipynb: The code with instructions to generat the supp figures
 
-+ digital_worm_n_dev_dif.py: A verison of the model written in Python 3.7.1 in which the developmental speeds remain unchanged upon switching the diet. Used in `supp_figs.ipynb`. 
++ digital_worm_n_dev_dif.py: A verison of the model written in Python 3.10 in which the developmental speeds remain unchanged upon switching the diet. Used in `supp_figs.ipynb`. 
 
 
 
