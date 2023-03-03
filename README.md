@@ -1,6 +1,6 @@
 # Cost of plasticity
 
-The software and data associated with Dardiry, Piscobulu, Kalirad & Sommer, _Experimental and theoretical support for costs of plasticity and phenotype in a nematode predatory trait_, *Evolution Letters* (https://doi.org/10.1093/evlett/qrac001)
+The software and data associated with Dardiry, Piscobulu, Kalirad & Sommer, _Experimental and theoretical support for costs of plasticity and phenotype in a nematode predatory trait_, **Evolution Letters** (https://doi.org/10.1093/evlett/qrac001)
 
 ## Contents:
 
